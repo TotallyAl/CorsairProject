@@ -6,7 +6,6 @@
 *.out
 *.toc
 *.synctex.gz
-*.pdf
 *.dvi
 *.fdb_latexmk
 *.fls
