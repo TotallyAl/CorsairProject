@@ -14,8 +14,10 @@ SCRIPTS_DIR = ./scripts
 
 DATA_CSV = $(wildcard $(DATA_DIR)/*.csv)
 SCRIPTS = $(wildcard $(SCRIPTS_DIR)/*.py)
-
 DATA_PDF = $(patsubst $(DATA_DIR)/%.csv, $(DATA_DIR)/%.pdf, $(DATA_CSV))
+
+PICTURES_DIR = ./pics 
+PICTURES = $(wildcard $(PICTURES_DIR)/*.png)
 
 # Default target: compile the main file
 all: print_vars $(OUTPUT_PDF)
@@ -37,7 +39,7 @@ $(DATA_DIR)/displacement_angle_amortisseur.pdf: $(DATA_DIR)/displacement_angle_a
 
 
 # Compile the main file
-$(OUTPUT_PDF): $(MAIN_FILE) $(DATA_PDF)
+$(OUTPUT_PDF): $(MAIN_FILE) $(DATA_PDF) $(PICTURES)
 	pdflatex $(MAIN_FILE)
 	pdflatex $(MAIN_FILE)
 
