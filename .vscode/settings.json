@@ -1,0 +1,6 @@
+{
+    "editor.wordWrapColumn": 80,
+    "[latex]": {
+        "editor.wordWrap": "bounded",
+    }
+}

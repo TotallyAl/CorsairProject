@@ -9,11 +9,35 @@ TEX_FILES = $(filter-out $(MAIN_FILE), $(wildcard *.tex))
 # Set the output PDF file
 OUTPUT_PDF = report.pdf
 
+DATA_DIR = ./data
+SCRIPTS_DIR = ./scripts
+
+DATA_CSV = $(wildcard $(DATA_DIR)/*.csv)
+SCRIPTS = $(wildcard $(SCRIPTS_DIR)/*.py)
+
+DATA_PDF = $(patsubst $(DATA_DIR)/%.csv, $(DATA_DIR)/%.pdf, $(DATA_CSV))
+
 # Default target: compile the main file
-all: $(OUTPUT_PDF)
+all: print_vars $(OUTPUT_PDF)
+
+graphs: $(DATA_PDF) $(SCRIPTS)
+
+print_vars:
+	$(info DATA_CSV: $(DATA_CSV))
+	$(info DATA_PDF: $(DATA_PDF))
+	$(info SCRIPTS: $(SCRIPTS))
+
+# General rule for converting CSVs into PDF
+%.pdf: %.csv $(SCRIPTS)
+	$(SCRIPTS_DIR)/plot.py $< $@
+
+# Special rule for displacement_angle_amortisseur.pdf
+$(DATA_DIR)/displacement_angle_amortisseur.pdf: $(DATA_DIR)/displacement_angle_amortisseur.csv $(SCRIPTS)
+	$(SCRIPTS_DIR)/plot_displacement.py $(DATA_DIR)/displacement_angle_amortisseur.csv $(DATA_DIR)/displacement_angle_amortisseur.pdf
+
 
 # Compile the main file
-$(OUTPUT_PDF): $(MAIN_FILE) $(TEX_FILES)
+$(OUTPUT_PDF): $(MAIN_FILE) $(DATA_PDF)
 	pdflatex $(MAIN_FILE)
 	pdflatex $(MAIN_FILE)
 
@@ -26,4 +50,4 @@ distclean: clean
 	rm -f $(OUTPUT_PDF)
 
 # PHONY targets
-.PHONY: all clean distclean
+.PHONY: print_vars clean distclean
