@@ -113,7 +113,8 @@ Comme on peut le voir sur la figure~\ref{fig:wheel_rotation_angle}, la roue aura
     \label{fig:wheel_rotation_angle}
 \end{figure}
 
-\subsection{Vitesse angulaire de l'axe principal}
+\pagebreak
+\subsection{Vitesse et accélération angulaire de l'axe principal}
 
 La figure~\ref{fig:rot_vel_accel_axe_principal} montre la vitesse angulaire du joint par rapport à l'axe z (figure~\ref{fig:velocity_main_axis}) et l'accélération angulaire correspondante (figure~\ref{fig:accel_main_axis}).
 \begin{figure}[h]
@@ -139,7 +140,7 @@ Les extrema sont:
         \hline
         & Vitesse & Accélération\\
         \hline
-        Minimum: & \( \SI{-6,945}{\deg\per\second} \) & \( \SI{-0.286}{\deg\per\second\squared} \)\\
+        Minimum: & \( \SI{-6,935}{\deg\per\second} \) & \( \SI{-0.286}{\deg\per\second\squared} \)\\
         \hline
         Maximum: & \( \SI{-5.022}{\deg\per\second}\) & \( \SI{0.294}{\deg\per\second\squared} \)\\
         \hline
@@ -149,13 +150,13 @@ Les extrema sont:
 Comme la fonction décrivant l'accélération est la dérivée de la fonction décrivant la vitesse, on peut observer que les extrema de l'accélération correspondent aux points d'inflexion de la vitesse. On observe aussi que lorsque l'accélération est positive, la vitesse augmente; quand l'accélération est négative, la vitesse diminue. On peut observer cette correspondance en superposant les graphes de vélocité et d'accélération, et en traçant une vertical au minimum et au maximum d'accélération (fig~\ref{fig:combined_vel_accel}).
 \begin{figure}[h]
     \centering
-    \includegraphics[height=8cm]{data/combined_vel_accel.pdf}
+    \includegraphics[height=6cm]{data/combined_vel_accel.pdf}
     \caption{Graphe de vitesse et d'accélération angulaire combinés}
     \label{fig:combined_vel_accel}
 \end{figure}
 
 
 \section{Commentaires}
-La vitesse angulaire initiale (resp. l'accélération angulaire initiale) n'est pas nulle car, pour cette simulation, nous forçons instantanément la vitesse du vérin à \(\SI{2,5}{\meter\per\second}\). Ce n'est pas réaliste car l'accélération du vérin serait infinie. Il faudrait en réalité appliquer une force, qui se traduirait par une accélération du vérin, qui provoquerait une augmentation progressive de de tout le système au départ d'une vitesse nulle (et vice versa pour les valeurs finales, lorsque le train est presque rentré).
+La vitesse angulaire initiale (resp. l'accélération angulaire initiale) n'est pas nulle car, pour cette simulation, nous forçons instantanément la vitesse du vérin à \(\SI{2,7}{\meter\per\second}\). Ce n'est pas réaliste car l'accélération du vérin serait infinie. Il faudrait en réalité appliquer une force, qui se traduirait par une accélération du vérin, qui provoquerait une augmentation progressive de de tout le système au départ d'une vitesse nulle (et vice versa pour les valeurs finales, lorsque le train est presque rentré).
 
 \end{document}
