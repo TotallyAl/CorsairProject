@@ -38,7 +38,7 @@ $(DATA_DIR)/displacement_angle_amortisseur.pdf: $(DATA_DIR)/displacement_angle_a
 	$(SCRIPTS_DIR)/plot_displacement.py $(DATA_DIR)/displacement_angle_amortisseur.csv $(DATA_DIR)/displacement_angle_amortisseur.pdf
 
 $(DATA_DIR)/combined_vel_accel.pdf: $(DATA_CSV) $(SCRIPTS)
-	$(SCRIPTS_DIR)/plot_combined_accel_vel.py $(DATA_DIR)/velocity_axeAmortisseur.csv $(DATA_DIR)/amortisseur_axeAmortisseur.csv combined_vel_accel.pdf
+	$(SCRIPTS_DIR)/plot_combined_accel_vel.py $(DATA_DIR)/velocity_axeAmortisseur.csv $(DATA_DIR)/amortisseur_axeAmortisseur.csv $(DATA_DIR)/combined_vel_accel.pdf
 
 # Compile the main file
 $(OUTPUT_PDF): $(MAIN_FILE) $(DATA_PDF) $(EXTRA_PDF) $(PICTURES)
