@@ -15,7 +15,7 @@ SCRIPTS_DIR = ./scripts
 DATA_CSV = $(wildcard $(DATA_DIR)/*.csv)
 SCRIPTS = $(wildcard $(SCRIPTS_DIR)/*.py)
 DATA_PDF = $(patsubst $(DATA_DIR)/%.csv, $(DATA_DIR)/%.pdf, $(DATA_CSV))
-
+EXTRA_PDF = $(DATA_DIR)/combined_vel_accel.pdf
 PICTURES_DIR = ./pics 
 PICTURES = $(wildcard $(PICTURES_DIR)/*.png)
 
@@ -37,9 +37,11 @@ print_vars:
 $(DATA_DIR)/displacement_angle_amortisseur.pdf: $(DATA_DIR)/displacement_angle_amortisseur.csv $(SCRIPTS)
 	$(SCRIPTS_DIR)/plot_displacement.py $(DATA_DIR)/displacement_angle_amortisseur.csv $(DATA_DIR)/displacement_angle_amortisseur.pdf
 
+$(DATA_DIR)/combined_vel_accel.pdf: $(DATA_CSV) $(SCRIPTS)
+	$(SCRIPTS_DIR)/plot_combined_accel_vel.py $(DATA_DIR)/velocity_axeAmortisseur.csv $(DATA_DIR)/amortisseur_axeAmortisseur.csv combined_vel_accel.pdf
 
 # Compile the main file
-$(OUTPUT_PDF): $(MAIN_FILE) $(DATA_PDF) $(PICTURES)
+$(OUTPUT_PDF): $(MAIN_FILE) $(DATA_PDF) $(EXTRA_PDF) $(PICTURES)
 	pdflatex $(MAIN_FILE)
 	pdflatex $(MAIN_FILE)
 

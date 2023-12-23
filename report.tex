@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{siunitx}
+
 % \usepackage{fancyhdr}
 \usepackage[a4paper,width=180mm,top=15mm,bottom=15mm]{geometry}
 
@@ -66,14 +68,20 @@
 \end{titlepage}
 
 \newpage
-\tableofcontents
+% \tableofcontents
 
 \newpage
 \section{Données du modèle paramétrique}
-
-Alexandre\dots
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis convallis convallis tellus id interdum velit. Enim nunc faucibus a pellentesque sit amet porttitor eget dolor. Sit amet nisl purus in mollis nunc. Vitae turpis massa sed elementum tempus egestas sed sed. Amet consectetur adipiscing elit ut aliquam purus sit amet. Eget velit aliquet sagittis id consectetur. Dolor sit amet consectetur adipiscing. Sapien eget mi proin sed libero enim sed faucibus. Eget velit aliquet sagittis id consectetur purus ut.
+Les paramètres qui ont été affectés à mon matricule étudiant (S2301654) sont
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        M1 & M2 & M3\\
+        \hline
+        4 & 5 & 6\\
+        \hline
+    \end{tabular}
+\end{center}
 
 \section{Analyse des résultats}
 \subsection{Rotation de la roue}
@@ -107,15 +115,47 @@ Comme on peut le voir sur la figure~\ref{fig:wheel_rotation_angle}, la roue aura
 
 \subsection{Vitesse angulaire de l'axe principal}
 
-La vitesse angulaire de l'axe principal...
-Feugiat nibh sed pulvinar proin. At erat pellentesque adipiscing commodo elit at imperdiet dui. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus. Vestibulum morbi blandit cursus risus. Tellus molestie nunc non blandit massa enim nec. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Neque ornare aenean euismod elementum nisi. A scelerisque purus semper eget. Tincidunt praesent semper feugiat nibh sed. Sit amet mattis vulputate enim nulla. Nisl vel pretium lectus quam id leo. Lorem dolor sed viverra ipsum nunc (\ref{fig:speed_main_axis}).
-
+La figure~\ref{fig:rot_vel_accel_axe_principal} montre la vitesse angulaire du joint par rapport à l'axe z (figure~\ref{fig:velocity_main_axis}) et l'accélération angulaire correspondante (figure~\ref{fig:accel_main_axis}).
 \begin{figure}[h]
-    \includegraphics{data/velocity_axeAmortisseur.pdf}
-    \caption{Rotation de la roue en fonction du temps}
-    \label{fig:speed_main_axis}
+    \centering
+    \begin{subfigure}[h]{.48\textwidth}        
+        \includegraphics[width=\textwidth]{data/velocity_axeAmortisseur.pdf}
+        \caption{Vitesse angulaire}
+        \label{fig:velocity_main_axis}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{.48\textwidth}        
+        \includegraphics[width=\textwidth]{data/amortisseur_axeAmortisseur.pdf}
+        \caption{Accélération angulaire}
+        \label{fig:accel_main_axis}
+    \end{subfigure}
+    \caption{Vitesse et accélération angulaire de l'amortisseur}
+    \label{fig:rot_vel_accel_axe_principal}
 \end{figure}
 
+Les extrema sont:
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & Vitesse & Accélération\\
+        \hline
+        Minimum: & \( \SI{-6,945}{\deg\per\second} \) & \( \SI{-0.286}{\deg\per\second\squared} \)\\
+        \hline
+        Maximum: & \( \SI{-5.022}{\deg\per\second}\) & \( \SI{0.294}{\deg\per\second\squared} \)\\
+        \hline
+    \end{tabular}
+\end{center}
+
+Comme la fonction décrivant l'accélération est la dérivée de la fonction décrivant la vitesse, on peut observer que les extrema de l'accélération correspondent aux points d'inflexion de la vitesse. On observe aussi que lorsque l'accélération est positive, la vitesse augmente; quand l'accélération est négative, la vitesse diminue. On peut observer cette correspondance en superposant les graphes de vélocité et d'accélération, et en traçant une vertical au minimum et au maximum d'accélération (fig~\ref{fig:combined_vel_accel}).
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=8cm]{data/combined_vel_accel.pdf}
+    \caption{Graphe de vitesse et d'accélération angulaire combinés}
+    \label{fig:combined_vel_accel}
+\end{figure}
+
+
 \section{Commentaires}
+La vitesse angulaire initiale (resp. l'accélération angulaire initiale) n'est pas nulle car, pour cette simulation, nous forçons instantanément la vitesse du vérin à \(\SI{2,5}{\meter\per\second}\). Ce n'est pas réaliste car l'accélération du vérin serait infinie. Il faudrait en réalité appliquer une force, qui se traduirait par une accélération du vérin, qui provoquerait une augmentation progressive de de tout le système au départ d'une vitesse nulle (et vice versa pour les valeurs finales, lorsque le train est presque rentré).
 
 \end{document}
